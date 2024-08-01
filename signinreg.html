@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Register</title>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/loginandregister.css">
+</head>
+<script type="text/javascript">
+function formValidation() {
+	var farmername = document.signin.farmername;
+	var password = document.signin.pass;
+	var confirmpassword = document.signin.confirmpass;
+	
+	if (Emptyfield(farmername, password, confirmpassword)) {
+		if (allLetter(farmername)) {
+			if (matchingandsize(password, confirmpassword)) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function Emptyfield(farmername, pass, confirmpass) {
+	var farmername_len = farmername.value.length;
+	var pass_len = pass.value.length;
+	var confirmpass_len = confirmpass.value.length;
+	
+	if (farmername_len == 0 || pass_len == 0 || confirmpass_len == 0) {
+		alert("Fields should not be empty");
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function allLetter(farmername) {
+	var letters = /^[A-Za-z]+$/;
+	if (farmername.value.match(letters)) {
+		return true;
+	} else {
+		alert('Username must have alphabet characters only');
+		farmername.focus();
+		return false;
+	}
+}
+
+function matchingandsize(pass, confirmpass) {
+	if (pass.value.length < 5) {
+		alert('Password should have at least 5 characters!');
+		pass.focus();
+		return false;
+	} else if (pass.value != confirmpass.value) {
+		alert('Password and confirm password should match!');
+		confirmpass.focus();
+		return false;
+	} else {
+		return true;
+	}
+}
+</script>
+<body>
+<form name="signin" method="post" action="reguser.php" class="login-form" onsubmit="return formValidation()">
+  <h1 class="login-title">Register</h1>
+
+        <div class="input-box">
+            <i class="bx bxs-user"></i>
+            <input type="text" name="farmername" placeholder="Username">
+        </div>
+        <div class="input-box">
+            <i class="bx bxs-lock-alt"></i>
+            <input type="password" name="pass" placeholder="Password">
+        </div>
+		<div class="input-box">
+            <i class="bx bxs-lock-alt"></i>
+            <input type="password" name="confirmpass" placeholder="Confirm Password">
+        </div>
+
+        <button class="login-btn" type="submit" name="submit">Register</button>
+
+        <p class="register">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+    </form>
+	
+</body>
+</html>
